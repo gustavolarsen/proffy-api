@@ -1,10 +1,12 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
@@ -31,6 +33,15 @@ class Subject {
 
   @OneToMany(() => Schedule, (schedule) => schedule.subject)
   schedules: Schedule[];
+
+  @Column({ default: false })
+  isActive: boolean;
+
+  @CreateDateColumn({ name: 'created_at' })
+  created_at: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at: Date;
 
   constructor() {
     if (!this.id) {

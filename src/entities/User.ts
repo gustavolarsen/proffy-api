@@ -2,9 +2,11 @@ import {
   BeforeInsert,
   BeforeUpdate,
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   PrimaryColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import bcrypt from 'bcryptjs';
 
@@ -28,6 +30,15 @@ class User {
 
   @Column({ select: false })
   password: string;
+
+  @Column({ default: false })
+  isActive: boolean;
+
+  @CreateDateColumn({ name: 'created_at' })
+  created_at: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at: Date;
 
   constructor() {
     if (!this.id) {

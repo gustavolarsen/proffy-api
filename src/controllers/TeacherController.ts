@@ -28,6 +28,15 @@ class TeacherController {
 
     return response.status(201).json({ teacher: newTeacher });
   }
+
+  async editTeacherById(request: Request, response: Response) {
+    const { id } = request.params;
+    const { bio, avatar } = request.body;
+
+    const teacher = await getRepository(Teacher).save({ id, bio, avatar });
+
+    response.status(200).json(teacher);
+  }
 }
 
 export { TeacherController };

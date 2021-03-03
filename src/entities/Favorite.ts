@@ -1,40 +1,37 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
+  ManyToOne,
   JoinColumn,
-  OneToMany,
-  OneToOne,
   PrimaryColumn,
-  UpdateDateColumn,
+  CreateDateColumn,
 } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
+import { Subject } from './Subject';
 import { User } from './User';
 
 @Entity()
-class Teacher {
+class Favorite {
   @PrimaryColumn()
   readonly id: string;
 
   @Column()
-  bio: string;
-
-  @Column()
-  avatar: string;
-
-  @Column()
   user_id: string;
 
-  @OneToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
 
+  @Column()
+  subject_id: string;
+
+  @ManyToOne(() => Subject)
+  @JoinColumn({ name: 'subject_id' })
+  subject: Subject;
+
   @CreateDateColumn({ name: 'created_at' })
   created_at: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updated_at: Date;
 
   constructor() {
     if (!this.id) {
@@ -43,4 +40,4 @@ class Teacher {
   }
 }
 
-export { Teacher };
+export { Favorite };

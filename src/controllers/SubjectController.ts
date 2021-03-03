@@ -1,9 +1,9 @@
 import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
 import { Subject } from '../entities/Subject';
-import { Schedule } from '../entities/Schedule';
-import { ISchedule } from '../interfaces/ScheduleInterface';
-import convertHourToMinutes from '../utils/convertHourToMinutes';
+import { ScheduleController } from '../controllers/ScheduleController';
+
+const scheduleController = new ScheduleController();
 
 class SubjectController {
   async getSubjectByName(request: Request, response: Response) {
@@ -30,21 +30,22 @@ class SubjectController {
       teacher_id,
     });
 
-    const scheduleSubject = schedule.map((scheduleItem: ISchedule) => {
-      return {
-        week_day: scheduleItem.week_day,
-        time_start: convertHourToMinutes(scheduleItem.time_start),
-        time_end: convertHourToMinutes(scheduleItem.time_end),
-        subject_id: newSubject.id,
-      };
-    });
-
-    const newSchedule = getRepository(Schedule).create(scheduleSubject);
-
     await getRepository(Subject).save(newSubject);
-    await getRepository(Schedule).save(newSchedule);
+
+    await scheduleController.create(newSubject.id, schedule);
 
     return response.status(201).json(newSubject);
+  }
+
+  async editSubjectById(request: Request, response: Response) {
+    const { id } = request.params;
+    const { name, cost, schedule } = request.body;
+
+    await scheduleController.create(id, schedule);
+
+    const subject = await getRepository(Subject).save({ id, name, cost });
+
+    response.status(200).json(subject);
   }
 }
 
