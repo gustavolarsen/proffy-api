@@ -9,9 +9,9 @@
 
 ## 🚀 Sobre
 
-Este projeto é rferete a **API REST** consumida pelo **Proffy** que é uma aplicação Web e Mobile feita para auxiliar na conexão entre os alunos e os professores. Logo, esta aplicação oferece aos professores a possibilidade de registrar aulas, podendo adicionar informações como a disciplina, o custo e horário e aos alunos a possibilidade de buscar pelas aulas cadastradas.
+Este projeto é referente a **API REST** consumida pelo **Proffy**, uma aplicação Web e Mobile criada para auxiliar na conexão entre os alunos e os professores. Esta aplicação oferece aos professores a possibilidade de cadastrar aulas particulares, podendo adicionar informações da disciplina, o custo e horário. Aos alunos a possibilidade de buscar pelas aulas cadastradas e de entrar em contato com professor via Whatsapp.
 
-Essa aplicação foi realizada durante a Next **Level Week #2**, projeto da [Rocketseat](https://rocketseat.com.br/).
+Essa API foi desenvolvida baseada na NLW02 **Next Level Week #2**, da [Rocketseat](https://rocketseat.com.br/).
 
 ## 💡 Tecnologias
 
